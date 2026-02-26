@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.name }} — Portfolio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+    <div class="nav-logo">MM<span class="dot">.</span></div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#publications">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle">&#9776;</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+    <div class="hero-bg">
+        <div class="grid-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+    </div>
+    <div class="hero-content">
+        <div class="hero-tag mono">
+            <span class="status-dot"></span> Open to: Software Developer &middot; Data Scientist &middot; AI
+        </div>
+        <h1 class="hero-name">{{ profile.name }}</h1>
+        <h2 class="hero-title">
+            <span id="role-text">Software Engineer</span>
+        </h2>
+        <p class="hero-subtitle mono">{{ profile.subtitle }}</p>
+        <p class="hero-summary">{{ profile.summary }}</p>
+        <div class="hero-actions">
+            <a href="#experience" class="btn btn-primary">View Work</a>
+            <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        </div>
+        <div class="hero-stats">
+            <div class="stat">
+                <span class="stat-num" data-target="3">3</span><span class="stat-plus">+</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num" data-target="3">3</span>
+                <span class="stat-label">Industrial Platforms</span>
+            </div>
+            <div class="stat">
+                <span class="stat-num" data-target="2">2</span>
+                <span class="stat-label">Publications</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-scroll mono">scroll down &#8595;</div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag mono">01 / EXPERIENCE</span>
+            <h2 class="section-title">Professional Work</h2>
+        </div>
+
+        {% for job in profile.experience %}
+        <div class="company-block">
+            <div class="company-header reveal">
+                <div>
+                    <h3 class="company-name">{{ job.company }}</h3>
+                    <p class="company-role">{{ job.role }}</p>
+                </div>
+                <div class="company-meta">
+                    <span class="mono">{{ job.period }}</span>
+                    <span>&#128205; {{ job.location }}</span>
+                </div>
+            </div>
+
+            <div class="projects-grid">
+                {% for proj in job.projects %}
+                <div class="project-card reveal">
+                    <div class="project-number mono">0{{ loop.index }}</div>
+                    <h4 class="project-name">{{ proj.name }}</h4>
+                    <p class="project-desc">{{ proj.description }}</p>
+                    <ul class="project-highlights">
+                        {% for h in proj.highlights %}
+                        <li>{{ h }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tech-stack">
+                        {% for t in proj.tech %}
+                        <span class="tech-tag">{{ t }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- PERSONAL PROJECTS -->
+<section class="section section-dark" id="projects">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag mono">02 / PROJECTS</span>
+            <h2 class="section-title">Personal Projects</h2>
+        </div>
+        <div class="personal-projects">
+            {% for proj in profile.projects %}
+            <div class="personal-card reveal">
+                <div class="personal-card-inner">
+                    <div class="card-type mono">{{ proj.type }}</div>
+                    <h3 class="card-title">{{ proj.name }}</h3>
+                    <p class="card-desc">{{ proj.description }}</p>
+                    <ul class="card-highlights">
+                        {% for h in proj.highlights %}
+                        <li>&#8627; {{ h }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div class="tech-stack">
+                        {% for t in proj.tech %}
+                        <span class="tech-tag">{{ t }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag mono">03 / SKILLS</span>
+            <h2 class="section-title">Technical Stack</h2>
+        </div>
+        <div class="skills-grid">
+            {% for category, items in profile.skills.items() %}
+            <div class="skill-category reveal">
+                <h4 class="skill-cat-title mono">{{ category }}</h4>
+                <div class="skill-items">
+                    {% for item in items %}
+                    <span class="skill-pill">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="interests-block">
+            <h3 class="section-subtitle">Areas of Interest</h3>
+            <div class="interests-list">
+                {% for interest in profile.interests %}
+                <div class="interest-item reveal">
+                    <span class="interest-arrow">&#8594;</span> {{ interest }}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section class="section section-accent" id="publications">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag mono">04 / RESEARCH</span>
+            <h2 class="section-title">Publications</h2>
+        </div>
+        <div class="pub-list">
+            {% for pub in profile.publications %}
+            <div class="pub-item reveal">
+                <span class="pub-type mono">{{ pub.type }}</span>
+                <div class="pub-info">
+                    <h4 class="pub-title">{{ pub.title }}</h4>
+                    <p class="pub-journal">{{ pub.journal }}</p>
+                    {% if pub.url %}
+                    <a href="{{ pub.url }}" target="_blank" class="pub-link mono">View Publication &#8594;</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-dark" id="contact">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag mono">05 / CONTACT</span>
+            <h2 class="section-title">Let's Connect</h2>
+        </div>
+        <div class="contact-block">
+            <p class="contact-intro">I'm open to new opportunities in Software Development, Data Science, and AI. Feel free to reach out.</p>
+            <div class="contact-links">
+                <a href="mailto:{{ profile.email }}" class="contact-link reveal">
+                    <span class="contact-icon">&#9993;</span>
+                    <span>{{ profile.email }}</span>
+                </a>
+                <a href="tel:{{ profile.phone }}" class="contact-link reveal">
+                    <span class="contact-icon">&#128222;</span>
+                    <span>+91 {{ profile.phone }}</span>
+                </a>
+                <a href="{{ profile.linkedin }}" target="_blank" class="contact-link reveal">
+                    <span class="contact-icon">in</span>
+                    <span>LinkedIn &mdash; Monark Mehta</span>
+                </a>
+                <a href="{{ profile.github }}" target="_blank" class="contact-link reveal">
+                    <span class="contact-icon">{ }</span>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <p class="footer-text mono">&copy; 2025 {{ profile.name }} &middot; Built with Flask + Python</p>
+    </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
