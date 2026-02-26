@@ -59,6 +59,27 @@ profile_data = {
                     "tech": ["Python", "SQL", "Time-Series Analysis", "Statistical Modeling", "Grafana"]
                 }
             ]
+        },
+        {
+            "company": "StampMyVisa",
+            "role": "Software Developer Intern",
+            "period": "Aug 2022 – Jan 2023",
+            "location": "Remote",
+            "projects": [
+                {
+                    "name": "AI-Driven Visa Processing Automation",
+                    "description": "Developed AI-powered automation tools to streamline visa processing workflows and reduce manual data handling.",
+                    "highlights": [
+                        "Developed AI-powered chatbot using RASA NLP framework to automate customer queries",
+                        "Designed conversational flows and intent classification models",
+                        "Built OCR-based document extraction pipeline for automated form processing",
+                        "Implemented backend APIs for document validation and workflow automation",
+                        "Improved operational efficiency by reducing manual data handling processes",
+                        "Collaborated with product and backend teams to enhance user experience"
+                    ],
+                    "tech": ["Python", "RASA", "NLP", "OCR", "Flask", "REST APIs"]
+                }
+            ]
         }
     ],
     "projects": [
@@ -107,10 +128,10 @@ profile_data = {
             "url": "https://www.mdpi.com/1999-5903/13/12/308"
         },
         {
-            "title": "AI / Optimization Domain Research",
+            "title": "Social Distancing Detection using Computer Vision & Deep Learning",
             "journal": "Springer Book Chapter",
             "type": "Book Chapter",
-            "url": ""
+            "url": "https://link.springer.com/chapter/10.1007/978-3-031-16364-7_9"
         }
     ]
 }
